@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 11:22:44 by jtian             #+#    #+#             */
-/*   Updated: 2021/11/24 15:00:58 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:39:03 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return(0);
 	while (s[i])
 		i++;
 	return (i);

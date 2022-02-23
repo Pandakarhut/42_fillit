@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 23:03:09 by jtian             #+#    #+#             */
-/*   Updated: 2022/02/18 21:22:34 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:51:29 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # define BUFF_SIZE 10
+# define MAX_LINE_LEN 1000
 
 //mandatory
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));

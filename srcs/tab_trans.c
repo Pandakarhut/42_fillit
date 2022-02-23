@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_trans.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phtruong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 17:47:56 by phtruong          #+#    #+#             */
-/*   Updated: 2019/04/10 09:47:57 by phtruong         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:08:57 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_tetid(int *tet)
 	(tabcmp(tet, ZR_PIECE, sizeof(tet))) && (name = "ZR_PIECE");
 	return (name);
 }
-
+#include "stdio.h"
 int		*convert_id(char *id)
 {
 	int *tet;

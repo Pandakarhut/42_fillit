@@ -6,18 +6,17 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 13:11:08 by jtian             #+#    #+#             */
-/*   Updated: 2021/11/24 15:13:59 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 15:56:32 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include "stdio.h"
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
-
 	i = 0;
-	while (*s1 || *s2)
+	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);

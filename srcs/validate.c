@@ -6,12 +6,12 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 09:41:41 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/18 22:19:54 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:22:13 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+#include "stdio.h"
 int		low_x(int *tab)
 {
 	int x;
@@ -23,9 +23,9 @@ int		low_x(int *tab)
 	x = tab[i];
 	while (size--) // 4 3 2 1
 	{
-		// if (tab[i] >= 0 && tab[i] <= 3)
-		if (tab[i] < x) // ? tab[6] = 2 tab[0] = 1
-			x = tab[i];
+		if (tab[i] >= 0 && tab[i] <= 3)
+			if (tab[i] < x) // ? tab[6] = 2 tab[0] = 1
+				x = tab[i];
 		i += 2;
 	}
 	return (x);
@@ -100,14 +100,12 @@ int		*trans_coord(int *tab)
 
 int		dup_coord(int *dst, int *src)
 {
-	int *pdst;
 	int i;
 
 	i = 0;
-	pdst = dst;
 	while (i < 8)
 	{
-		pdst[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
 	return (1);

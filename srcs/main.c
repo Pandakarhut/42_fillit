@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:07:16 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/20 21:04:49 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:08:24 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_grid(char **grid, int size)
 
 int		help_solve(char **grid, int *tet, t_tetris *stack, int size)
 {
-	if (collision(grid, tet, size))
+	if (no_collision(grid, tet, size))
 	{
 		insert_piece(grid, tet, stack->c);
 		if (solve_tet(grid, stack->next, size))
@@ -71,14 +71,14 @@ int		solve_tet(char **grid, t_tetris *stack, int size)
 	return (0);
 }
 
-int		solve_driver(int fd)
+int		solve_driver(int fd, char *line)
 {
 	t_tetris	*tmp;
 	t_tetris	*stack;
 	int			size;
 	char		**grid;
 
-	tmp = store_tet(fd, NULL);
+	tmp = store_tet(fd, line);
 	size = start_size(tmp); // 3
 	stack = id_to_coord(tmp);
 	stck_free(tmp);
@@ -99,8 +99,10 @@ int		solve_driver(int fd)
 int		main(int argc, char *argv[])
 {
 	int	fd;
+	char *line;
 
 	fd = 0;
+	line = malloc(MAX_LINE_LEN+1);
 	if (argc != 2)
 	{
 		ft_putstr(USAGE);
@@ -112,11 +114,11 @@ int		main(int argc, char *argv[])
 		ft_exit();
 	else if (fd > 0)
 	{
-		if (pre_read(fd))
+		if (pre_read(fd, line))
 		{
 			fd = open(argv[1], O_RDONLY); // fd closed when calling pre_read
-			solve_driver(fd);
+			solve_driver(fd, line);
 		}
 	}
-	close(fd);
+	free(line);
 }

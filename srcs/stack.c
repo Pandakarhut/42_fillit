@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phtruong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:50 by phtruong          #+#    #+#             */
-/*   Updated: 2019/04/10 12:59:19 by phtruong         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:22:20 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@ int			count_tet(t_tetris *stack)
 	}
 	return (c);
 }
-
+#include "stdio.h"
 t_tetris	*id_to_coord(t_tetris *stack)
 {
 	t_tetris	*head;
 	t_tetris	*piece;
 	char		*tet_id;
 	char		c;
-
 	c = 'A';
 	head = NULL;
 	while (stack)
 	{
-		tet_id = stack->tet_id;
+		tet_id = (char *)(stack->tet_id);
 		if (head == NULL)
 			head = add_piece(convert_id(tet_id), c++);
 		else
@@ -51,7 +50,6 @@ t_tetris	*id_to_coord(t_tetris *stack)
 t_tetris	*add_piece(void *tet_id, char tet_c)
 {
 	t_tetris *piece;
-
 	piece = (t_tetris *)malloc(sizeof(t_tetris));
 	piece->tet_id = tet_id;
 	piece->c = tet_c;
@@ -71,7 +69,7 @@ t_tetris	*append(void *tet_id, t_tetris *head, char c)
 	cursor->next = piece;
 	return (head);
 }
-
+#include "stdio.h"
 t_tetris	*store_tet(const int fd, char *line)
 {
 	int			*tet;
@@ -94,7 +92,6 @@ t_tetris	*store_tet(const int fd, char *line)
 		free(tet);
 		if (!(get_next_line(fd, &line)))
 			break ;
-		free(line);
 	}
 	close(fd);
 	return (first);

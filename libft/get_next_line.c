@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 13:00:43 by jtian             #+#    #+#             */
-/*   Updated: 2022/01/27 21:30:06 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:20:55 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	buffer_to_str(char *buffer, char **str)
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*str[FD_SIZE];
+	static char		*str[FD_SIZE];
 	char		buffer[BUFF_SIZE + 1];
 	int			len;
 

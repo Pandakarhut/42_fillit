@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   grid.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phtruong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 14:01:54 by phtruong          #+#    #+#             */
-/*   Updated: 2019/04/10 12:59:32 by phtruong         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:10:01 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+#include "stdio.h"
 int		start_size(t_tetris *stack)
 {
 	int		blocks;
@@ -55,7 +55,6 @@ char	**gen_grid(int size)
 		grid[i] = (char *)malloc(sizeof(char) * size + 1);
 		line = gen_line(size);
 		ft_strcpy(grid[i], line);
-		free(line);
 		i++;
 	}
 	grid[i] = NULL;
