@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:31:46 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/20 21:19:48 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 19:32:29 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,38 +58,27 @@ int		piece_collide(char **grid, int *piece)
 	while (size--)
 	{
 		if (grid[piece[i + 1]][piece[i]] != '.')
-		// grid[y][x]
-		// [y] = tet[i + 1] = tet[1] = 0
-		// [x] = tet[i] = tet[0] =0
-		// grid[0][0]
 			return (1);
 		i += 2;
-		// grid[y][x]
-		// [y] = tet[i + 1] = tet[3] = 0
-		// [x] = tet[i] = tet[2] =1
-		// grid[0][1]
-
-		// grid[y][x]
-		// [y] = tet[i + 1] = tet[5] = 1
-		// [x] = tet[i] = tet[4] =0
-		// grid[1][0]
 	}
 	return (0);
 }
 
-int		box_collide(int *tet, int size)
+int		box_collide(int *tet, int grid_size)
 {
 	int x;
 	int y;
 
 	x = hi_x(tet);
 	y = hi_y(tet);
-	if (x >= size || y >= size)
+	if (x >= grid_size || y >= grid_size)
 		return (1);
 	return (0);
 }
 
-int		no_collision(char **grid, int *tet, int size)
+int		no_collision(char **grid, int *tet, int grid_size)
 {
-	return (!(box_collide(tet, size)) && !(piece_collide(grid, tet)));
+	if (box_collide(tet, grid_size) || piece_collide(grid, tet))
+		return (0);
+	return (1);
 }

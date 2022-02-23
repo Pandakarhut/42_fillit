@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 14:01:54 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/23 16:10:01 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 19:34:20 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int		start_size(t_tetris *stack)
 {
 	int		blocks;
-	int		size;
+	int		grid_size;
 
-	size = 2;
+	grid_size = 2;
 	blocks = (count_tet(stack) * 4);
-	while (blocks > (size * size))
-		size += 1;
-	return (size);
+	while (blocks > (grid_size * grid_size))
+		grid_size += 1;
+	return (grid_size);
 }
 
 char	*gen_line(int col)
@@ -41,19 +41,19 @@ char	*gen_line(int col)
 	return (line);
 }
 
-char	**gen_grid(int size)
+char	**gen_grid(int grid_size)
 {
 	char	**grid;
 	int		i;
 	char	*line;
 
 	i = 0;
-	if (!(grid = (char **)malloc(sizeof(char *) * size + 1)))
+	if (!(grid = (char **)malloc(sizeof(char *) * grid_size + 1)))
 		return (NULL);
-	while (i < size)
+	while (i < grid_size)
 	{
-		grid[i] = (char *)malloc(sizeof(char) * size + 1);
-		line = gen_line(size);
+		grid[i] = (char *)malloc(sizeof(char) * grid_size + 1);
+		line = gen_line(grid_size);
 		ft_strcpy(grid[i], line);
 		i++;
 	}

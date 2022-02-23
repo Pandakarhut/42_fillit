@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_fn.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phtruong <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 09:43:34 by phtruong          #+#    #+#             */
-/*   Updated: 2019/04/10 12:59:44 by phtruong         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:32:56 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	stck_free(t_tetris *stack)
+void	free_stack(t_tetris *stack)
 {
 	t_tetris *tmp;
 
@@ -21,30 +21,17 @@ void	stck_free(t_tetris *stack)
 	{
 		tmp = stack;
 		stack = tmp->next;
+		free(tmp->tet_points);
 		free(tmp);
 	}
 }
 
-void	stck_free_coord(t_tetris *stack)
-{
-	t_tetris *tmp;
-
-	tmp = NULL;
-	while (stack)
-	{
-		tmp = stack;
-		stack = tmp->next;
-		free(tmp->tet_id);
-		free(tmp);
-	}
-}
-
-void	free_grid(char **grid, int size)
+void	free_grid(char **grid, int grid_size)
 {
 	int i;
 
 	i = 0;
-	while (i < size)
+	while (i < grid_size)
 	{
 		ft_strdel(&grid[i]);
 		i++;

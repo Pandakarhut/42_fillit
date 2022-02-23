@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:40:40 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/23 16:10:12 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 19:18:05 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		h_count(char *line)
 	return (count);
 }
 
-int		chk_char(char *line)
+int		check_char(char *line)
 {
 	while (*line)
 	{
@@ -44,8 +44,8 @@ int		chk_char(char *line)
 	}
 	return (1);
 }
-#include "stdio.h"
-int		read_one(const int fd, char **line)
+
+int		read_one_tet(const int fd, char **line)
 {
 	int n_line;
 	int count;
@@ -55,9 +55,9 @@ int		read_one(const int fd, char **line)
 	{
 		if (get_next_line(fd, line))
 		{
-			count += h_count(*line); // horizontal_count
+			count += h_count(*line); // hash count
 			//wrong line length, wrong #, check char
-		 	if (ft_strlen(*line) != 4 || count > 4 || !chk_char(*line))
+		 	if (ft_strlen(*line) != 4 || count > 4 || !check_char(*line))
 		 		ft_exit();
 		}
 		n_line++;
@@ -67,16 +67,19 @@ int		read_one(const int fd, char **line)
 	return (1);
 }
 
-int		pre_read(const int fd, char *line)
+int		pre_read(const int fd)
 {
+	char *line;
+	line = (char *)malloc(sizeof(char)*MAX_LINE_LEN+1);
 	while (1)
 	{
-		read_one(fd, &line);
+		read_one_tet(fd, &line);
 		if (!get_next_line(fd, &line))
 			break ;
 		if (ft_strlen(line) != 0)
 			ft_exit();
 	}
 	close(fd);
+	free(line);
 	return (1);
 }

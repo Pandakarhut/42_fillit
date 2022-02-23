@@ -6,58 +6,39 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:50 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/23 16:22:20 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 19:39:45 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include "stdio.h"
 
 int			count_tet(t_tetris *stack)
 {
-	int			c;
+	int			count;
 	t_tetris	*tmp;
 
 	tmp = stack;
-	c = 0;
+	count = 0;
 	while (tmp)
 	{
-		c++;
+		count++;
 		tmp = tmp->next;
 	}
-	return (c);
-}
-#include "stdio.h"
-t_tetris	*id_to_coord(t_tetris *stack)
-{
-	t_tetris	*head;
-	t_tetris	*piece;
-	char		*tet_id;
-	char		c;
-	c = 'A';
-	head = NULL;
-	while (stack)
-	{
-		tet_id = (char *)(stack->tet_id);
-		if (head == NULL)
-			head = add_piece(convert_id(tet_id), c++);
-		else
-			piece = append(convert_id(tet_id), head, c++);
-		stack = stack->next;
-	}
-	return (head);
+	return (count);
 }
 
-t_tetris	*add_piece(void *tet_id, char tet_c)
+t_tetris	*add_piece(int *tet_points, char tet_c)
 {
 	t_tetris *piece;
 	piece = (t_tetris *)malloc(sizeof(t_tetris));
-	piece->tet_id = tet_id;
+	piece->tet_points = tet_points;
 	piece->c = tet_c;
 	piece->next = NULL;
 	return (piece);
 }
 
-t_tetris	*append(void *tet_id, t_tetris *head, char c)
+t_tetris	*append(int *tet_points, t_tetris *head, char c)
 {
 	t_tetris *cursor;
 	t_tetris *piece;
@@ -65,34 +46,35 @@ t_tetris	*append(void *tet_id, t_tetris *head, char c)
 	cursor = head;
 	while (cursor->next != NULL)
 		cursor = cursor->next;
-	piece = add_piece(tet_id, c);
+	piece = add_piece(tet_points, c);
 	cursor->next = piece;
 	return (head);
 }
-#include "stdio.h"
-t_tetris	*store_tet(const int fd, char *line)
+
+t_tetris	*gen_stack(const int fd)
 {
+	char		*line;
 	int			*tet;
-	char		*tet_id;
 	t_tetris	*piece;
 	t_tetris	*first;
 	char		c;
 
+	line = (char *)malloc(sizeof(char)*MAX_LINE_LEN+1);
 	c = 'A';
 	first = NULL;
 	while (1)
 	{
-		tet = trans_coord(one_tetris(fd, line));
-		if (!(tet_id = get_tetid(tet)))
+		tet = trans_coord(get_one_tetris(fd, line));
+		if (!valid_piece(tet))
 			ft_exit();
 		if (first == NULL)
-			first = add_piece(tet_id, c++);
+			first = add_piece(tet, c++);
 		else
-			piece = append(tet_id, first, c++);
-		free(tet);
+			piece = append(tet, first, c++);
 		if (!(get_next_line(fd, &line)))
 			break ;
 	}
 	close(fd);
+	free(line);
 	return (first);
 }

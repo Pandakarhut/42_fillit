@@ -6,7 +6,7 @@
 /*   By: jtian <jtian@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 09:41:41 by phtruong          #+#    #+#             */
-/*   Updated: 2022/02/23 16:22:13 by jtian            ###   ########.fr       */
+/*   Updated: 2022/02/23 19:22:10 by jtian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		low_y(int *tab)
 	return (y);
 }
 
-int		*one_tetris(const int fd, char *line)
+int		*get_one_tetris(const int fd, char *line)
 {
 	int		x;
 	int		y;
@@ -98,7 +98,7 @@ int		*trans_coord(int *tab)
 	return (tab);
 }
 
-int		dup_coord(int *dst, int *src)
+int		copy_coords(int *dst, int *src)
 {
 	int i;
 
